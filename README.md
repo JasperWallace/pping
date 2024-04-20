@@ -12,6 +12,8 @@ from the Internet).
 
 For more information on pping, please visit http://pollere.net/pping.html
 
+For on-going work that incorporates the pping approach within an ISP, see: https://github.com/thebracket/cpumap-pping
+
 ## Compiling ##
 
 See the docker/ directory for a one-liner to get you binaries, or continue below.
