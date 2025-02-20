@@ -371,12 +371,15 @@ static std::string localAddrOf(const std::string ifname)
 
     if (getifaddrs(&ifap) == 0) {
         for (auto ifp = ifap; ifp; ifp = ifp->ifa_next) {
-            if (ifname == ifp->ifa_name &&
-                  ifp->ifa_addr->sa_family == AF_INET) {
-                uint32_t ip = ((struct sockaddr_in*)
+            if (ifname == ifp->ifa_name) {
+                if (ifp->ifa_addr != NULL) {
+                    if (ifp->ifa_addr->sa_family == AF_INET) {
+                        uint32_t ip = ((struct sockaddr_in*)
                                ifp->ifa_addr)->sin_addr.s_addr;
-                local = IPv4Address(ip).to_string();
-                break;
+                        local = IPv4Address(ip).to_string();
+                        break;
+                    }
+                }
             }
         }
         freeifaddrs(ifap);
